@@ -2,6 +2,6 @@
     font-family: 'Cabinet Grotesk';
     font-style:  normal;
     font-weight: 700;
-    /* font-display: swap; */
-    src: url("./fonts/CabinetGrotesk-Regular.otf") format("otf")
+    font-display: swap;
+    src: url("./fonts/CabinetGrotesk-Medium.otf") format("opentype")
   }

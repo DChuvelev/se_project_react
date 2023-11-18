@@ -4,7 +4,7 @@ export default function ModalAddGarment(props) {
     return (
         <>
             <label className='modal__field-label' for='garment-name'>Name</label>
-            <input type="text" className="modal__input" id='garment-name' placeholder="Name" minlength="1" maxlength="30" required/>
+            <input type="text" className="modal__input" id='garment-name' placeholder="Name" minLength="1" maxLength="30" required/>
             <label className='modal__field-label' for='garment-url'>Image</label>
             <input type="url" className="modal__input" id='garment-url' placeholder="Image URL" required/>
             <fieldset className='modal__input-radio-fieldset'>

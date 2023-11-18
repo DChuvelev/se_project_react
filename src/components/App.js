@@ -16,7 +16,6 @@ function App() {
   const [weatherInfo, setWeatherInfo] = React.useState({});
   const [windowState, setWindowState] = React.useState({modalOpened: false});
   React.useEffect(() => {
-    console.log("That's a use effect from App. Should be used once.");
     const weatherApiInfo = new WeatherApi(weatherApiRequest);
     weatherApiInfo.requestWeather().then(res => {
       // console.log(res);
@@ -24,6 +23,7 @@ function App() {
     }).catch(err => {
       alert(err);
     });
+    console.log(weatherInfo);
   }, []);
 
   const handleCardClick = (card) => {
@@ -35,6 +35,12 @@ function App() {
     })
   }
 
+  const handleSubmitAddGarment = (evt) => {
+    // console.log(evt);
+    evt.preventDefault();
+    handleModalClose();
+  }
+
   const handleAddClothes = () => {
     setWindowState({
       modalOpened: true,
@@ -42,13 +48,18 @@ function App() {
       formType: 'add-garment',
       name: 'New garment',
       btnTxt: 'Add garment',
+      onSubmit: handleSubmitAddGarment,
     })  
   }
 
-  const handleClose = () => {    
-    setWindowState({
-      ...windowState,
-      modalOpened: false
+  const handleModalClose = () => {    
+    console.log('Current state: ', windowState);
+    setWindowState((prevState) => {
+      console.log('Prev state: ', prevState);
+      return {
+        ...prevState,
+        modalOpened: false
+      }
     });
   }
 
@@ -59,7 +70,7 @@ function App() {
         <Header date={currentDate} weatherInfo={weatherInfo} handleAddClothes={handleAddClothes}/>
         <Main weatherInfo={weatherInfo} handleCardClick={handleCardClick}/>
         <Footer />
-        <Modal windowState={windowState}  onClose={handleClose}/>
+        <Modal windowState={windowState}  onClose={handleModalClose}/>
       </div>
     </div>
   );

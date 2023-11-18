@@ -17,6 +17,7 @@ export default class WeatherApi {
             city: res.name,
             temp: Math.round(res.main.temp),
             icon: res.weather[0].icon,
+            isNight: Date.now()/10 > res.sys.sunrise && Date.now()/10 < res.sys.sunset ? false : true,
         };
         if (res.main.temp > 32) {
             compactInfo.tempInOneWord = 'Very hot';

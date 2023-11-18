@@ -11,6 +11,11 @@
     overflow: hidden;
 }
 
+.weather__container_type_night {
+    background-color: rgba(40, 104, 151, 1);
+    ;
+}
+
 .weather__temp {
     color: white;
     margin-left: 16px;

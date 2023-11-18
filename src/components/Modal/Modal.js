@@ -20,7 +20,7 @@ export default function Modal(props) {
         return () => {
             document.removeEventListener('keydown', checkEscKey);
         }
-    }, [checkEscKey]);
+    }, []);
 
     return (
         <div className={'modal ' + (props.windowState.modalOpened ? 'modal_opened' : '')} onClick={checkClickOutsideContent}>
