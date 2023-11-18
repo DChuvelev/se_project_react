@@ -1,0 +1,71 @@
+.header {
+    box-sizing: border-box;
+    height: 72px;
+    /* border-bottom: 1px red solid; */
+    padding-top: 32px;
+}
+
+.header__menu {
+    display: grid;
+    grid-template-columns: 89px 1fr 1fr 170px 40px;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 1440px;
+    padding: 0 40px;
+    height: 40px;
+    list-style: none;
+}
+
+.header__logo {
+    width: 89px;
+    height: 40px;
+    object-fit: contain;
+
+}
+
+.header__date {
+    margin-left: 24px;
+    justify-self: start;
+    color: black;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.header__btn-container {
+    justify-self: end;
+    margin-right: 20px;
+}
+
+.header__add-btn {
+    font-family: 'Cabinet Grotesk';
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    border: none;
+    padding: 0;
+}
+
+.header__add-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.header__user-name {
+    justify-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 12px;
+}
+
+.header__user-avatar {
+    object-fit: scale-down;    
+    
+}
+
+.header__avatar-conteiner {
+    width: 40px;
+    height: 40px;
+
+}

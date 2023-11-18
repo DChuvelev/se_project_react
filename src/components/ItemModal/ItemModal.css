@@ -1,0 +1,19 @@
+.item-modal__picture {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /* max-height: 540px; */
+    object-fit: cover;
+}
+
+.item-modal__title {
+    margin: auto 0 auto 36px;
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.item-modal__weather {
+    margin: 0 0 0 36px;
+    font-size: 20px;
+    line-height: 1.2;
+}

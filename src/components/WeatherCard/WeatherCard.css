@@ -1,0 +1,24 @@
+.weather__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    /* width: 100%; */
+    background-color: rgba(0, 163, 255, 1);
+    margin: 31px 40px 0 40px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.weather__temp {
+    color: white;
+    margin-left: 16px;
+    font-size: 36px;
+    line-height: 1.2;
+}
+
+.weather__icon {
+    height: 120px;
+    object-fit: fill;
+}
