@@ -1,7 +1,7 @@
 .modal {
-    transition: visibility 1s steps(2, jump-start), opacity 0.5s linear;
+    /* transition: visibility 1s steps(2, jump-start), opacity 0.5s linear; */
     display: inline-flex;
-    visibility: hidden;
+    visibility: visible;
     position: fixed;
     top: 0;
     left: 0;
@@ -11,13 +11,13 @@
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.3);
-    opacity: 0;
-}
-
-.modal_opened {
-    visibility: visible;
     opacity: 1;
 }
+
+/* .modal_opened {
+    visibility: visible;
+    opacity: 1;
+} */
 
 .modal__content {
     position: relative;
@@ -30,7 +30,7 @@
     overflow: hidden;
 }
 
-.modal__content_type_image {
+.modal__content_type_card-preview {
     margin-top: 106px;
     width: 498px;
     height: 610px;

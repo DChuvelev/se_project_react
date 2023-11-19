@@ -11,10 +11,10 @@ export default function Main(props) {
             <WeatherCard weatherInfo={props.weatherInfo}/>
             <h2 className='main__heading'>Today is {props.weatherInfo.temp}°C / You may want to wear:</h2>            
             <ul className='main__cards'>
-                {defaultClothingItems.map(item => {
+                {defaultClothingItems.filter((item) => item.weather === props.weatherInfo.tempInOneWord).map(item => {
                     // console.log(item);
                     return (
-                        <ItemCard item={item} handleCardClick={props.handleCardClick}/>
+                        <ItemCard item={item} key={item._id} handleCardClick={props.handleCardClick}/>
                     )
                 })}
             </ul>        

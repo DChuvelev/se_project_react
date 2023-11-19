@@ -14,7 +14,9 @@ function App() {
   const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
   
   const [weatherInfo, setWeatherInfo] = React.useState({});
-  const [windowState, setWindowState] = React.useState({modalOpened: false});
+  const [activeModal, setActiveModal] = React.useState({type: ''});
+  const [selectedCard, setSelectedCard] = React.useState({});
+  const [formInfo, setFormInfo] = React.useState({});
   React.useEffect(() => {
     const weatherApiInfo = new WeatherApi(weatherApiRequest);
     weatherApiInfo.requestWeather().then(res => {
@@ -23,16 +25,12 @@ function App() {
     }).catch(err => {
       alert(err);
     });
-    console.log(weatherInfo);
   }, []);
 
   const handleCardClick = (card) => {
     // console.log(card);
-    setWindowState({
-      modalOpened: true,
-      modalType: 'image',
-      card: card,
-    })
+    setSelectedCard(card);
+    setActiveModal('card-preview');
   }
 
   const handleSubmitAddGarment = (evt) => {
@@ -42,9 +40,8 @@ function App() {
   }
 
   const handleAddClothes = () => {
-    setWindowState({
-      modalOpened: true,
-      modalType: 'form',
+    setActiveModal('form');
+    setFormInfo({
       formType: 'add-garment',
       name: 'New garment',
       btnTxt: 'Add garment',
@@ -53,14 +50,7 @@ function App() {
   }
 
   const handleModalClose = () => {    
-    console.log('Current state: ', windowState);
-    setWindowState((prevState) => {
-      console.log('Prev state: ', prevState);
-      return {
-        ...prevState,
-        modalOpened: false
-      }
-    });
+    setActiveModal('');
   }
 
   
@@ -70,7 +60,8 @@ function App() {
         <Header date={currentDate} weatherInfo={weatherInfo} handleAddClothes={handleAddClothes}/>
         <Main weatherInfo={weatherInfo} handleCardClick={handleCardClick}/>
         <Footer />
-        <Modal windowState={windowState}  onClose={handleModalClose}/>
+        {activeModal === 'form' && <Modal activeModal={activeModal} formInfo={formInfo} onClose={handleModalClose}/>}
+        {activeModal === 'card-preview' && <Modal activeModal={activeModal} card={selectedCard} onClose={handleModalClose}/>}
       </div>
     </div>
   );

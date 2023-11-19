@@ -19,7 +19,7 @@ function Header(props) {
                     Dmitry Chuvelev
                 </li>
                 <li className='header__avatar-conteiner'>
-                    <img src={avatarPath} className='header__user-avatar'/>
+                    <img src={avatarPath} className='header__user-avatar' alt='User avatar'/>
                 </li>
             </ul>            
         </header>

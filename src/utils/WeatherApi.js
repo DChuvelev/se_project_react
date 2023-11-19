@@ -13,24 +13,19 @@ export default class WeatherApi {
         })
     }
     getFilteredWeather = (res) => {
+        const timeInSec = Date.now()/1000;
         const compactInfo = {
             city: res.name,
             temp: Math.round(res.main.temp),
             icon: res.weather[0].icon,
-            isNight: Date.now()/10 > res.sys.sunrise && Date.now()/10 < res.sys.sunset ? false : true,
+            isNight: timeInSec > res.sys.sunrise && timeInSec < res.sys.sunset ? false : true,
         };
-        if (res.main.temp > 32) {
-            compactInfo.tempInOneWord = 'Very hot';
-        } else if (res.main.temp > 25) {
-            compactInfo.tempInOneWord = 'Hot';
-        } else if (res.main.temp > 21) {
-            compactInfo.tempInOneWord = 'Normal';
-        } else if (res.main.temp > 15) {
-            compactInfo.tempInOneWord = 'Cool';
-        } else if (res.main.temp > 3) {
-            compactInfo.tempInOneWord = 'Cold';
+        if (res.main.temp > 25) {
+            compactInfo.tempInOneWord = 'hot';
+        } else if (res.main.temp > 18) {
+            compactInfo.tempInOneWord = 'warm';
         } else {
-            compactInfo.tempInOneWord = "It's fucking winter!";
+            compactInfo.tempInOneWord = "cold";
         };
         return compactInfo;
     }
