@@ -5,6 +5,9 @@ import Main from "./Main/Main";
 import Footer from "./Footer/Footer";
 import WeatherApi from "../utils/WeatherApi.js";
 import Modal from "./Modal/Modal";
+import ItemModal from './ItemModal/ItemModal';
+import ModalWithForm from './ModalWithForm/ModalWithForm';
+import ModalAddGarment from './ModalAddGarment/ModalAddGarment'
 import {
   weatherApiRequest
 } from "../utils/constants.js"
@@ -60,8 +63,12 @@ function App() {
         <Header date={currentDate} weatherInfo={weatherInfo} handleAddClothes={handleAddClothes}/>
         <Main weatherInfo={weatherInfo} handleCardClick={handleCardClick}/>
         <Footer />
-        {activeModal === 'form' && <Modal activeModal={activeModal} formInfo={formInfo} onClose={handleModalClose}/>}
-        {activeModal === 'card-preview' && <Modal activeModal={activeModal} card={selectedCard} onClose={handleModalClose}/>}
+        {activeModal === 'form' && <ModalWithForm formInfo={formInfo} activeModal={activeModal} onClose={handleModalClose}>          
+            <fieldset className='modal__input-fieldset'>
+                <ModalAddGarment/>
+            </fieldset>
+        </ModalWithForm>}
+        {activeModal === 'card-preview' && <ItemModal activeModal={activeModal} card={selectedCard} onClose={handleModalClose}/>}
       </div>
     </div>
   );

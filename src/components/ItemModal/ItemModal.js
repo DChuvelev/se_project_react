@@ -1,12 +1,13 @@
 import React from 'react';
 import './ItemModal.css';
-export default function ItemModal(props) {
+import Modal from '../Modal/Modal'
+export default function ItemModal( {activeModal, card, onClose} ) {
     // console.log('Item modal rerender', props);
     return (
-        <>
-            <img className='item-modal__picture' src={props.card.link} alt={`Image of ${props.card.name}`}/>
-            <p className='item-modal__title'>{props.card.name}</p>
-            <p className='item-modal__weather'>Weather: {props.card.weather}</p>
-        </>
+        <Modal activeModal={activeModal} onClose={onClose}>
+            <img className='item-modal__picture' src={card.link} alt={`Image of ${card.name}`}/>
+            <p className='item-modal__title'>{card.name}</p>
+            <p className='item-modal__weather'>Weather: {card.weather}</p>
+        </Modal>
     )
 }

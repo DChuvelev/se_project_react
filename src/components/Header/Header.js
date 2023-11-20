@@ -7,7 +7,7 @@ function Header(props) {
         <header className='header'>            
             <ul className="header__menu">
                 <li>
-                    <img src={logoPath} className='header__logo'/>
+                    <img src={logoPath} className='header__logo' alt='WTWR logo'/>
                 </li>
                 <li className='header__date'>
                     {props.date}, {props.weatherInfo.city}
