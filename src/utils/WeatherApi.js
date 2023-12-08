@@ -16,13 +16,16 @@ export default class WeatherApi {
         const timeInSec = Date.now()/1000;
         const compactInfo = {
             city: res.name,
-            temp: Math.round(res.main.temp),
+            temp: {
+                F: Math.round(res.main.temp) + '°F',
+                C: Math.round((res.main.temp - 32) * 5/9) + '°C',
+            },
             icon: res.weather[0].icon,
             isNight: timeInSec > res.sys.sunrise && timeInSec < res.sys.sunset ? false : true,
         };
-        if (res.main.temp > 25) {
+        if (res.main.temp.C > 25) {
             compactInfo.tempInOneWord = 'hot';
-        } else if (res.main.temp > 18) {
+        } else if (res.main.temp.C > 18) {
             compactInfo.tempInOneWord = 'warm';
         } else {
             compactInfo.tempInOneWord = "cold";

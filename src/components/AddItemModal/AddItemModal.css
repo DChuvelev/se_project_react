@@ -1,0 +1,45 @@
+.add-item__input-fieldset {
+    border: none;
+    padding: 0;
+    margin: auto;
+    width: 100%;
+}
+
+.add-item__input-radio-fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 32px 0;
+    width: 100%;
+}
+
+.add-item__field-label {
+    font-size: 16px;
+    line-height: 1.25;
+    margin: 0 0 8px 0;
+}
+
+.add-item__input {
+    font-family: 'Cabinet Grotesk';
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 27px;
+    border: none;
+    border-bottom: rgba(0, 0, 0, 1) 1px solid;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: 0em;
+    margin-bottom: 24px;
+}
+.add-item__select-weather-title {
+    font-size: 16px;
+    line-height: 1.25;
+    margin-bottom: 12px;
+}
+
+.add-item__radio-item {
+    margin: 0 5px 8px 0;
+}

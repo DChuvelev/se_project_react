@@ -6,8 +6,9 @@
 }
 
 .header__menu {
+    /* position: relative; */
     display: grid;
-    grid-template-columns: 89px 1fr 1fr 170px 40px;
+    grid-template-columns: 89px 1fr 1fr 146px 170px 40px;
     align-items: center;
     margin: 0 auto;
     padding: 0;
@@ -34,8 +35,15 @@
 }
 
 .header__btn-container {
+    justify-self: center;
+    /* margin-right: 20px; */
+}
+
+.header__toggle-switch {
+    position: relative;
     justify-self: end;
-    margin-right: 20px;
+    margin-right: 10px;
+    height: 28px;
 }
 
 .header__add-btn {
@@ -52,11 +60,11 @@
 }
 
 .header__user-name {
-    justify-self: end;
+    justify-self: center;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-right: 12px;
+    /* margin-right: 12px; */
 }
 
 .header__user-avatar {
@@ -64,7 +72,7 @@
     
 }
 
-.header__avatar-conteiner {
+.header__avatar-container {
     width: 40px;
     height: 40px;
 

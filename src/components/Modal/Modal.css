@@ -36,6 +36,16 @@
     height: 610px;
     display: grid;
     grid-template-rows: 498px 56px 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+.modal__content_type_confirm-delete {
+    margin-top: 271px;
+    width: 670px;
+    height: 280px;
+    display: grid;
+    grid-template-rows: 84px 24px 64px 48px;
+    justify-content: center;
 }
 
 .modal__content_type_form {
@@ -65,6 +75,10 @@
 }
 
 .modal__content_type_form > .modal__close-btn {
+    background-image: url("../../images/close-btn-grey.svg"); 
+}
+
+.modal__content_type_confirm-delete > .modal__close-btn {
     background-image: url("../../images/close-btn-grey.svg"); 
 }
 

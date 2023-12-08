@@ -1,0 +1,23 @@
+.sidebar {
+    padding: 40px 0 35px 40px;
+}
+
+.sidebar__user-info {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+}
+
+.sidebar__user-name {
+    justify-self: start;
+    align-self: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0 0 0 16px;
+}
+
+.sidebar__user-avatar {
+    object-fit: scale-down;
+    width: 40px;
+    height: 40px;    
+}

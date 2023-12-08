@@ -1,0 +1,15 @@
+.footer {
+    display: flex;
+    padding: 80px 40px 24px 40px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+.footer__text {
+    margin: 0;
+}
+
+.footer__year {
+    margin: 0 0 0 auto;
+}
