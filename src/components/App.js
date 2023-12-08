@@ -24,7 +24,7 @@ function App() {
   const [activeModal, setActiveModal] = useState({type: ''});
   const [selectedCard, setSelectedCard] = useState({});
   const [formInfo, setFormInfo] = useState({});
-  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('C');
+  const [currentTemperatureUnit, handleToggleSwitchChange ] = useState('C');
   const [clothingItems, setClothingItems] = useState([]);
   const [cardToDelete, setCardToDelete] = useState();
   const clothesApi = new ClothesApi(clothesApiRequest);
@@ -94,7 +94,7 @@ function App() {
 
   
   return (
-    <CurrentTemperatureUnitContext.Provider value={{ currentTemperatureUnit, setCurrentTemperatureUnit }}>
+    <CurrentTemperatureUnitContext.Provider value={{ currentTemperatureUnit, handleToggleSwitchChange  }}>
       {weatherInfoReady && 
       <div className="page">
         <div className="page__wrapper">      
