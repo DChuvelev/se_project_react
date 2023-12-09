@@ -5,6 +5,20 @@
     line-height: 1.2;
 }
 
+.clothes-section__button {
+    margin: 0 0 0 20px;
+    background-color: none;
+    border: none;
+    align-self: flex-end;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.clothes-section__button:hover {
+    color: rgba(255, 77, 0, 1);
+}
+
 .clothes-section__cards {
     /* padding: 47px 0 67px 0; */
     padding: 0 20px;

@@ -14,18 +14,19 @@ export default class WeatherApi {
     }
     getFilteredWeather = (res) => {
         const timeInSec = Date.now()/1000;
+        const tempInCelsius = (res.main.temp - 32) * 5/9;
         const compactInfo = {
             city: res.name,
             temp: {
                 F: Math.round(res.main.temp) + '°F',
-                C: Math.round((res.main.temp - 32) * 5/9) + '°C',
+                C: Math.round(tempInCelsius) + '°C',
             },
             icon: res.weather[0].icon,
             isNight: timeInSec > res.sys.sunrise && timeInSec < res.sys.sunset ? false : true,
         };
-        if (res.main.temp.C > 25) {
+        if (tempInCelsius > 25) {
             compactInfo.tempInOneWord = 'hot';
-        } else if (res.main.temp.C > 18) {
+        } else if (tempInCelsius > 18) {
             compactInfo.tempInOneWord = 'warm';
         } else {
             compactInfo.tempInOneWord = "cold";

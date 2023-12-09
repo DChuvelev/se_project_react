@@ -27,7 +27,9 @@ function App() {
   const [currentTemperatureUnit, handleToggleSwitchChange ] = useState('C');
   const [clothingItems, setClothingItems] = useState([]);
   const [cardToDelete, setCardToDelete] = useState();
-  const clothesApi = new ClothesApi(clothesApiRequest);
+  const [isBusy, setIsBusy] = React.useState(false);
+  const [clothesApi, setClothesApi] = React.useState();
+  
   useEffect(() => {
     const weatherApiInfo = new WeatherApi(weatherApiRequest);
     weatherApiInfo.requestWeather().then(res => {
@@ -40,8 +42,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    
-    clothesApi.requestClothes().then(res => {
+    const localClothesApi = new ClothesApi(clothesApiRequest);
+    setClothesApi(localClothesApi);
+    localClothesApi.requestClothes().then(res => {
       setClothingItems(res);
     }).catch(err => {
       alert(err);
@@ -55,12 +58,15 @@ function App() {
   }
 
   const handleSubmitAddGarment = (item) => {
+    setIsBusy(true);
     clothesApi.addItem(item).then(res => {
         setClothingItems([...clothingItems, res]);
     }).catch(err => {
         alert(err);
+    }).finally(() => {
+      handleModalClose();
+      setIsBusy(false);
     })
-    handleModalClose();
   }
 
   const handleAddClothes = () => {
@@ -69,6 +75,7 @@ function App() {
       formType: 'add-garment',
       name: 'New garment',
       btnTxt: 'Add garment',
+      btnTxtTypeBusy: 'Saving...',
       handleSubmit: handleSubmitAddGarment,
     })  
   }
@@ -83,8 +90,10 @@ function App() {
       setClothingItems(clothingItems.filter((item) => item._id != card._id));
     }).catch(err => {
       alert(err);
-    });
-    handleModalClose();
+    }).finally(() => {
+      handleModalClose();
+      setIsBusy(false);
+    })
   }
 
   const handleDelete = (card) => {
@@ -104,11 +113,11 @@ function App() {
               <Main weatherInfo={weatherInfo} handleCardClick={handleCardClick} clothingItems={clothingItems} />
             </Route>
             <Route path="/profile">
-              <Profile handleCardClick={handleCardClick} clothingItems={clothingItems}/>
+              <Profile handleCardClick={handleCardClick} clothingItems={clothingItems} handleAddItems={handleAddClothes}/>
             </Route>
           </Switch>
           <Footer />
-          {activeModal === 'form' && <AddItemModal formInfo={formInfo} activeModal={activeModal} onClose={handleModalClose} />}
+          {activeModal === 'form' && <AddItemModal formInfo={formInfo} activeModal={activeModal} onClose={handleModalClose} isBusy={isBusy} />}
           {activeModal === 'card-preview' && <ItemModal activeModal={activeModal} card={selectedCard} handleDelete={handleDelete} onClose={handleModalClose}/>}
           {activeModal === 'confirm-delete' && <ConfirmDeleteModal activeModal={activeModal} cardToDelete={cardToDelete} onOk={deleteCard} onClose={handleModalClose}/>}
         </div>
