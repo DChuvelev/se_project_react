@@ -60,11 +60,11 @@ function App() {
   const handleSubmitAddGarment = (item) => {
     setIsBusy(true);
     clothesApi.addItem(item).then(res => {
-        setClothingItems([...clothingItems, res]);
+        setClothingItems([res, ...clothingItems]);
+        handleModalClose();
     }).catch(err => {
         alert(err);
-    }).finally(() => {
-      handleModalClose();
+    }).finally(() => {      
       setIsBusy(false);
     })
   }
@@ -88,10 +88,10 @@ function App() {
     clothesApi.deleteItem(card._id).then(res => {
       console.log("Delete done");
       setClothingItems(clothingItems.filter((item) => item._id != card._id));
+      handleModalClose();
     }).catch(err => {
       alert(err);
     }).finally(() => {
-      handleModalClose();
       setIsBusy(false);
     })
   }
