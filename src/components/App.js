@@ -70,6 +70,9 @@ function App() {
     });
   }, []);
 
+  const handleToggleSwitchChange = (unit) => {
+    setCurrentTemperatureUnit(unit);
+  }
 
   //--------------------- Cards --------------------------
 
@@ -271,7 +274,7 @@ function App() {
 
   
   return (
-    <CurrentTemperatureUnitContext.Provider value={{ currentTemperatureUnit, setCurrentTemperatureUnit  }}>
+    <CurrentTemperatureUnitContext.Provider value={{ currentTemperatureUnit, handleToggleSwitchChange  }}>
       <CurrentUserContext.Provider value={{ currentUser }}>      
         {weatherInfoReady && 
         <div className="page">

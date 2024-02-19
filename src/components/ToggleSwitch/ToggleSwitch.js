@@ -2,12 +2,12 @@ import React from 'react';
 import './ToggleSwitch.css';
 import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
 export default function ToggleSwitch() {
-    const {  currentTemperatureUnit, setCurrentTemperatureUnit  } = React.useContext(CurrentTemperatureUnitContext);
+    const {  currentTemperatureUnit, handleToggleSwitchChange  } = React.useContext(CurrentTemperatureUnitContext);
     // console.log(props);
     const handleSwitchTemperature = () => {
         currentTemperatureUnit === 'F'
-            ? setCurrentTemperatureUnit('C')
-            : setCurrentTemperatureUnit('F');
+            ? handleToggleSwitchChange('C')
+            : handleToggleSwitchChange('F');
     }
     return (
         <>
