@@ -1,5 +1,5 @@
 import React from 'react';
-import { CurrentTemperatureUnitContext } from '../contexts';
+import { CurrentTemperatureUnitContext } from '../contexts/contexts';
 import './Main.css';
 import WeatherCard from '../WeatherCard/WeatherCard';
 import ItemCard from '../ItemCard/ItemCard';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import { CurrentTemperatureUnitContext, CurrentUserContext } from './contexts.js';
+import { CurrentTemperatureUnitContext, CurrentUserContext } from './contexts/contexts.js';
 import './App.css';
 import Header from "./Header/Header";
 import Main from "./Main/Main";
@@ -305,6 +305,7 @@ function App() {
               </Route>
             </Switch>
             <Footer />
+
             {activeModal === 'form' && formInfo.formType === 'add-garment' && <AddItemModal 
               formInfo={formInfo} 
               activeModal={activeModal} 
