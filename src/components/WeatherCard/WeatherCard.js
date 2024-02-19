@@ -1,9 +1,8 @@
 import React from 'react';
 import './WeatherCard.css';
-import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
+import { CurrentTemperatureUnitContext } from '../contexts';
 export default function WeatherCard(props) {
         const { currentTemperatureUnit } = React.useContext(CurrentTemperatureUnitContext);
-        // console.log(props.weatherInfo.temp, currentTemperatureUnit);
         return (
         <section className={`weather__container${props.weatherInfo.isNight ? ' weather__container_type_night' : ''}`}>
             <p className='weather__temp'>{props.weatherInfo.temp[currentTemperatureUnit]}</p>

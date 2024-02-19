@@ -1,14 +1,17 @@
 import React from 'react';
 import './ItemModal.css';
-import Modal from '../Modal/Modal'
+import Modal from '../Modal/Modal';
+import { CurrentUserContext } from '../contexts';
+import { useContext } from 'react';
 export default function ItemModal( {activeModal, card, onClose, handleDelete} ) {
-    // console.log('Item modal rerender', card);
+    const { currentUser } = useContext(CurrentUserContext);
+    const isOwner = currentUser._id === card.owner;
     return (
         <Modal activeModal={activeModal} onClose={onClose}>
-            <img className='item-modal__picture' src={card.imageUrl} alt={`Image of ${card.name}`}/>
+            <img className='item-modal__picture' src={card.imageUrl} alt={`${card.name}`}/>
             <p className='item-modal__title'>{card.name}</p>
             <p className='item-modal__weather'>Weather: {card.weather}</p>
-            <button className='item-modal__delete-btn' onClick={() => {handleDelete(card)}}>Delete item</button>
+            {isOwner && <button className='item-modal__delete-btn' onClick={() => {handleDelete(card)}}>Delete item</button>}
         </Modal>
     )
 }

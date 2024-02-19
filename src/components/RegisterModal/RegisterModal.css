@@ -1,24 +1,17 @@
-.add-item__input-fieldset {
+.register__input-fieldset {
     border: none;
     padding: 0;
     margin: auto;
     width: 100%;
 }
 
-.add-item__input-radio-fieldset {
-    border: none;
-    padding: 0;
-    margin: 0 0 32px 0;
-    width: 100%;
-}
-
-.add-item__field-label {
+.register__field-label {
     font-size: 16px;
     line-height: 1.25;
     margin: 0 0 8px 0;
 }
 
-.add-item__input {
+.register__input {
     font-family: 'Cabinet Grotesk';
     font-style: normal;
     font-weight: 700;
@@ -34,21 +27,13 @@
     letter-spacing: 0em;
     margin-bottom: 24px;
 }
-.add-item__select-weather-title {
-    font-size: 16px;
-    line-height: 1.25;
-    margin-bottom: 12px;
-}
 
-.add-item__radio-item {
-    margin: 0 5px 8px 0;
-}
 
-.add-item__input-field {
+.register__input-field {
     position: relative;
 }
 
-.add-item__error-message {
+.register__error-message {
     position: absolute;
     color: red;
     font-size: 16px;
@@ -58,3 +43,5 @@
     top: 52px;
     left: 0;
 }
+
+

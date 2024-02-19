@@ -1,10 +1,15 @@
 .sidebar {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    align-items: flex-start;
     padding: 40px 0 35px 40px;
 }
 
 .sidebar__user-info {
     display: grid;
     grid-template-columns: 40px 1fr;
+    margin-bottom: 16px;
 }
 
 .sidebar__user-name {
@@ -20,4 +25,17 @@
     object-fit: scale-down;
     width: 40px;
     height: 40px;    
+}
+
+.sidebar__button {
+    font-family: 'Cabinet Grotesk';
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    border: none;
+    padding: 0;
+}
+
+.sidebar__button:hover {
+    color: rgba(255, 77, 0, 1);
 }

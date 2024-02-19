@@ -1,10 +1,12 @@
 import React from 'react';
 import logoPath from '../../images/header-logo.svg'
-import avatarPath from '../../images/Avatar.svg'
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
+import CleverAvatar from '../CleverAvatar/CleverAvatar';
 import './Header.css'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-function Header(props) {
+import { CurrentUserContext } from '../contexts';
+function Header({ date, weatherInfo, handleAddClothes, handleOpenRegisterModal, handleOpenLoginModal, loggedIn}) {
+    const {currentUser} = React.useContext(CurrentUserContext);
     return (
         <header className='header'>            
             <ul className="header__menu">
@@ -14,25 +16,34 @@ function Header(props) {
                     </Link>
                 </li>
                 <li className='header__date'>
-                    {props.date}, {props.weatherInfo.city}
+                    {date}, {weatherInfo.city}
                 </li>
                 <li className='header__toggle-switch'>
                     <ToggleSwitch />
                 </li>
-                <li className='header__btn-container'>
-                    <button className='header__add-btn' onClick={props.handleAddClothes}>+ Add Clothes</button>
-                </li>
-                
-                <li className="header__user-name">
-                    <Link to='/profile'>Dmitry Chuvelev</Link>
-                </li>
-                
-                <li className='header__avatar-container'>
-                    <Link to='/profile'>
-                        <img src={avatarPath} className='header__user-avatar' alt='User avatar'/>
-                    </Link>
-                </li>
-                
+                {loggedIn && <>
+                    <li className='header__btn-container'>
+                        <button className='header__menu-item-btn' onClick={handleAddClothes}>+ Add Clothes</button>
+                    </li>
+                    
+                    <li className="header__user-name">
+                        <Link className="header__link" to='/profile'>{currentUser.name}</Link>
+                    </li>
+                    
+                    <li>                        
+                        <Link to='/profile'>
+                            <CleverAvatar avatar={currentUser.avatar} name={currentUser.name}></CleverAvatar>
+                        </Link>                        
+                    </li>
+                </>}
+                {!loggedIn && <>
+                    <li className='header__btn-container'>
+                        <button className='header__menu-item-btn' onClick={handleOpenLoginModal}>Login</button>
+                    </li>
+                    <li className='header__btn-container'>
+                        <button className='header__menu-item-btn' onClick={handleOpenRegisterModal}>Register</button>
+                    </li>
+                </>}                
             </ul>            
         </header>
     )

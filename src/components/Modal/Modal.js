@@ -21,7 +21,7 @@ export default function Modal( {children, activeModal, onClose} ) {
     }, []);
 
     return (
-        <div className='modal ' onClick={checkClickOutsideContent}>
+        <div className='modal ' onMouseDown={checkClickOutsideContent}>
             <div className={`modal__content modal__content_type_${activeModal}`}>
                 {children}
                 <button type="button" className="modal__close-btn" onClick={onClose}/>

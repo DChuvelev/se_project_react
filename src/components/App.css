@@ -9,7 +9,8 @@
 }
 
 .page__wrapper {
-  /* border: 5px solid black; */
+  display: flex;
+  flex-direction: column;
   background-color: rgba(243, 243, 243, 1);
   margin: auto;
   max-width: 1440px;

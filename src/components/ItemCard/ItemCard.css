@@ -9,6 +9,16 @@
     background-color: #FFF;
 }
 
+.item-card__heading {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 15px;
+    column-gap: 10px;  
+}
+
 .item-card__image {
     grid-area: card-img;
     width: 100%;
@@ -20,13 +30,11 @@
     /* width: 74px; */
     height: 24px;
     background-color: white;
-    position: absolute;
+
     margin: 0;
     border-radius: 4px;
 
-    left: 50%;
-    transform: translate(-50%, 0);
-    top: 15px;
+
     padding: 2px 7px;
     color: #000;
     font-size: 16px;
@@ -35,4 +43,24 @@
     overflow: hidden;
     text-align: center;
     /* text-overflow: ellipsis; */
+}
+
+.item-card__text {
+    color: #000;
+    font-size: 16px;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.item-card__number-of-likes {
+    font-size: 16px;
+    line-height: 1.2;
+    margin: 0;
+    min-width: 18px;
+}
+
+.item-card__heart {
+    width: 18px;
+    height: 15px;
+    margin: 0;
 }

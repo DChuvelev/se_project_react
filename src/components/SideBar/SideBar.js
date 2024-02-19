@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './SideBar.css';
-import avatarPath from '../../images/Avatar.svg'
-export default function SideBar() {
+import CleverAvatar from '../CleverAvatar/CleverAvatar';
+import { CurrentUserContext } from '../contexts';
+export default function SideBar({handleLogout, handleOpenEditProfileModal}) {
+    const { currentUser } = useContext(CurrentUserContext);
+    const editUserProfile = () => {
+        handleOpenEditProfileModal(currentUser);
+    }
     return (
         <div className='sidebar'>
             <div className='sidebar__user-info'>
-                <img src={avatarPath} className='sidebar__user-avatar' alt='User avatar'/>
-                <p className="sidebar__user-name">Dmitry Chuvelev</p>
-            </div>                 
+                <CleverAvatar avatar={currentUser.avatar} name={currentUser.name}></CleverAvatar>
+                <p className="sidebar__user-name">{currentUser.name}</p>
+            </div>
+            <button className='sidebar__button' onClick={editUserProfile}>Change profile data</button>     
+            <button className='sidebar__button' onClick={handleLogout}>Log out</button>        
         </div>
     )
 }
