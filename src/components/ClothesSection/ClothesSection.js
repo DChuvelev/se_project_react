@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import './ClothesSection.css';
 import ItemCard from '../ItemCard/ItemCard';
-import { CurrentUserContext } from '../contexts/contexts';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 export default function ClothesSection({ handleCardClick, handleLike, handleDislike, clothingItems, handleAddClothes }) {
     const { currentUser } = useContext(CurrentUserContext);

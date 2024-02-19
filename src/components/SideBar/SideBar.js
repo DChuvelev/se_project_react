@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import './SideBar.css';
 import CleverAvatar from '../CleverAvatar/CleverAvatar';
-import { CurrentUserContext } from '../contexts/contexts';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 export default function SideBar({handleLogout, handleOpenEditProfileModal}) {
     const { currentUser } = useContext(CurrentUserContext);
     const editUserProfile = () => {

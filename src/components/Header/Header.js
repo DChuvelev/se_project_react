@@ -4,7 +4,7 @@ import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import CleverAvatar from '../CleverAvatar/CleverAvatar';
 import './Header.css'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import { CurrentUserContext } from '../contexts/contexts';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 function Header({ date, weatherInfo, handleAddClothes, handleOpenRegisterModal, handleOpenLoginModal, loggedIn}) {
     const {currentUser} = React.useContext(CurrentUserContext);
     return (

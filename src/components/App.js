@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import { CurrentTemperatureUnitContext, CurrentUserContext } from './contexts/contexts.js';
+import { CurrentTemperatureUnitContext } from '../contexts/CurrentTemperatureUnitContext.js';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import './App.css';
 import Header from "./Header/Header";
 import Main from "./Main/Main";
