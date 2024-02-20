@@ -4,7 +4,7 @@ import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import { useForm } from 'react-hook-form';
 export default function EditProfileModal( {formInfo, activeModal, onClose, isBusy} ) {
 
-    const { register, watch, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             name: formInfo.formValues.name, 
             avatar: formInfo.formValues.avatar
@@ -31,7 +31,8 @@ export default function EditProfileModal( {formInfo, activeModal, onClose, isBus
                             }
                         )} 
                     />
-                    {errors.name && (<p className="edit-profile__error-message">{errors.name.message}</p>)}
+                    {errors.name && (<p className="edit-profile__error-message">{errors.name.message}</p>)}    
+                     {/* the error appears only after first unsuccessful form submission */}
                 </div>
 
                 <div className='edit-profile__input-field'>

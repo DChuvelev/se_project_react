@@ -7,7 +7,6 @@ import Header from "./Header/Header";
 import Main from "./Main/Main";
 import Footer from "./Footer/Footer";
 import WeatherApi from "../utils/WeatherApi.js";
-import ClothesApi from '../utils/ClothesApi.js';
 import ItemModal from './ItemModal/ItemModal';
 import AddItemModal from './AddItemModal/AddItemModal.js';
 import RegisterModal from './RegisterModal/RegisterModal.js';
@@ -15,10 +14,9 @@ import LoginModal from './LoginModal/LoginModal.js';
 import Profile from './Profile/Profile.js';
 import ConfirmModal from './ConfirmModal/ConfirmModal.js';
 import EditProfileModal from './EditProfileModal/EditProfileModal.js';
-import {
-  weatherApiRequest,
-  clothesApiRequest
-} from "../utils/constants.js"
+import { weatherApiRequest } from "../utils/constants.js"
+import ProtectedRoute from '../utils/ProtectedRoute.js';
+import { clothesApi } from '../utils/ClothesApi.js'
 
 function App() {
   const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
@@ -30,7 +28,6 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit ] = useState('C');
   const [clothingItems, setClothingItems] = useState([]);
   const [isBusy, setIsBusy] = useState(false);
-  const [clothesApi, setClothesApi] = useState();
   const [currentUser, setCurrentUser] = useState({
     name: "",
     avatar: "",
@@ -47,51 +44,47 @@ function App() {
       // console.log(res);
       setWeatherInfo(weatherApiInfo.getFilteredWeather(res));
       setWeatherInfoReady(true);
-    }).catch(err => {
-      alert(err);
-    });
+    }).catch(alert);
   }, []);
 
   useEffect(() => {
-    const clothesApi = new ClothesApi(clothesApiRequest);
-    setClothesApi(clothesApi);
     clothesApi.checkToken(localStorage.getItem('jwt')).then((userInfo) => {
       setLoggedIn(true);
-      console.log(userInfo);
       setCurrentUser(userInfo);
-    }).catch((err) => {
-      console.error(err.message);
-    })
+    }).catch(console.error);
+  
     clothesApi.requestClothes().then(res => {
       setClothingItems(res.data);
-    }).catch(err => {
-      console.log('Bump');
-      alert(err);
-    });
+    }).catch(alert);
   }, []);
+
+//---------------------- Common functions -----------------------------
 
   const handleToggleSwitchChange = (unit) => {
     setCurrentTemperatureUnit(unit);
   }
 
+  const handleSubmit = (request) => {
+    setIsBusy(true);
+    return request().then(handleModalClose).catch(alert).finally(() => {    
+      setIsBusy(false);
+    })  
+  }
+
   //--------------------- Cards --------------------------
 
   const handleCardClick = (card) => {
-    // consnpole.log(card);
     setSelectedCard(card);
     setActiveModal('card-preview');
   }
 
   const handleSubmitAddClothes = (item) => {
-    setIsBusy(true);
-    clothesApi.addItem(item, localStorage.getItem('jwt')).then(res => {
+    handleSubmit(() => {
+      return clothesApi.addItem(item, localStorage.getItem('jwt')).then(res => {
         setClothingItems([res, ...clothingItems]);
-        handleModalClose();
-    }).catch(err => {
-        alert(err);
-    }).finally(() => {      
-      setIsBusy(false);
+      })
     })
+    
   }
 
   const handleAddClothes = () => {
@@ -107,12 +100,9 @@ function App() {
 
   const deleteSelectedCard = () => {
     clothesApi.deleteItem(selectedCard._id, localStorage.getItem('jwt')).then(() => {
-      console.log("Delete done");
       setClothingItems(clothingItems.filter((item) => item._id !== selectedCard._id));
       handleModalClose();
-    }).catch(err => {
-      alert(err);
-    }).finally(() => {
+    }).catch(alert).finally(() => {
       setIsBusy(false);
     })
   }
@@ -125,18 +115,14 @@ function App() {
     evt.stopPropagation();
     clothesApi.likeItem(card._id, localStorage.getItem('jwt')).then((res) => {
       setClothingItems(clothingItems => clothingItems.map(item => item._id === res._id ? res : item));
-    }).catch(err => {
-      alert(err);
-    });
+    }).catch(alert);
   }
 
   const handleDislike = (evt, card) => {
     evt.stopPropagation();
     clothesApi.dislikeItem(card._id, localStorage.getItem('jwt')).then((res) => {
       setClothingItems(clothingItems => clothingItems.map(item => item._id === res._id ? res : item));
-    }).catch(err => {
-      alert(err);
-    });
+    }).catch(alert);
   }
 
   //-------------------------- User login -------------------------------
@@ -144,7 +130,6 @@ function App() {
   const handleLogin = (userInfo) => {
     const {token, ...otherUserInfo} = userInfo;
     setCurrentUser(otherUserInfo);
-    console.log('User logged in', otherUserInfo);
     localStorage.setItem('jwt', token);
     setLoggedIn(true);
   }
@@ -164,15 +149,12 @@ function App() {
   }
 
   const handleSubmitLogin = ({ email, password }) => {
-    setIsBusy(true);
-    clothesApi.authorizeUser({ email, password }).then((res) => {
-      handleLogin(res);
-      handleModalClose();
-    }).catch((err) => {
-      alert(err);
-    }).finally(() => {
-      setIsBusy(false);
-    })      
+    handleSubmit(() => {
+      return clothesApi.authorizeUser({ email, password }).then((res) => {
+        handleLogin(res);
+      }) 
+    })
+    
   }
 
   const handleRedirectFromLoginToRegister = (formValues) => {
@@ -218,19 +200,13 @@ function App() {
     if (password !== confirmPassword) {
       alert('Passwords do not match!');
     } else {
-      setIsBusy(true);
-      clothesApi.registerUser({ email, name, avatar, password }).then(() => {
-        console.log('User registered');
-        handleModalClose();
-      }).then(() => {
-        return clothesApi.authorizeUser({ email, password }).then((res) => {
-          handleLogin(res);
-        })
-      }).catch((err) => {
-        alert(err);
-      }).finally(() => {
-        setIsBusy(false);
-      })      
+      handleSubmit(() => {
+        return clothesApi.registerUser({ email, name, avatar, password }).then(() => {
+          return clothesApi.authorizeUser({ email, password }).then((res) => {
+            handleLogin(res);
+          })
+        })        
+      }) 
     }
   }
 
@@ -253,19 +229,15 @@ function App() {
   }
 
   const handleSubmitEditProfile = ({ name, avatar}) => {
-    setIsBusy(true);
-    clothesApi.updateUserInfo({ userInfo: { name, avatar }, token: localStorage.getItem('jwt')}).then(() => {
-      setCurrentUser({
-        ...currentUser,
-        name,
-        avatar
+    handleSubmit(() => {
+      return clothesApi.updateUserInfo({ userInfo: { name, avatar }, token: localStorage.getItem('jwt')}).then(() => {
+        setCurrentUser({
+          ...currentUser,
+          name,
+          avatar
+        });
       })
-      handleModalClose();
-    }).catch((err) => {
-      alert(err);
-    }).finally(() => {
-      setIsBusy(false);
-    })      
+    })
   }
 
   const handleModalClose = () => {    
@@ -297,7 +269,7 @@ function App() {
                   clothingItems={clothingItems} 
                 />
               </Route>
-              <Route path="/profile">
+              <ProtectedRoute loggedIn={loggedIn} path="/profile">
                 <Profile 
                   handleCardClick={handleCardClick}
                   handleLike={handleLike}
@@ -306,7 +278,7 @@ function App() {
                   handleAddClothes={handleAddClothes} 
                   handleLogout={handleLogout}
                   handleOpenEditProfileModal={handleOpenEditProfileModal}/>
-              </Route>
+              </ProtectedRoute>
             </Switch>
             <Footer />
 

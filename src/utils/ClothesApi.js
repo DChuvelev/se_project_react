@@ -1,8 +1,9 @@
+import { clothesApiRequest } from "./constants";
+
 export default class ClothesApi {
     constructor({baseUrl, headers}) {
         this._baseUrl = baseUrl;
         this._headers = headers;
-        // console.log(this._baseUrl, this._headers);
     }
 
     _request(url, reqObj, errMsg) {
@@ -11,7 +12,6 @@ export default class ClothesApi {
                 return res.json();
             } else {
                 return res.json().then((err) => {
-                    console.log(err);
                     return Promise.reject(`${errMsg} ${err.message}`);
                 })                
             }    
@@ -88,3 +88,5 @@ export default class ClothesApi {
         }, 'Error liking item. Try again later.');
     }
 }
+
+export const clothesApi = new ClothesApi(clothesApiRequest);

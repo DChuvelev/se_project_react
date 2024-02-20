@@ -13,7 +13,12 @@ export default function CleverAvatar( {avatar, name} ) {
 
     return (
         <div className="clever-avatar__avatar-container">
-            {displayAvatar && <img key={Date.now()} src={avatar} onError={replaceAvatar} className='clever-avatar__user-avatar' alt='' style={{opacity: 1}}/>}
+            {displayAvatar && <img 
+                src={avatar} 
+                onError={replaceAvatar} 
+                className='clever-avatar__user-avatar' 
+                alt='Avatar'        // Actualy this is not needed here - when the avatar picture is not loaded I'm anyway replacing it
+                style={{opacity: 1}}/>}
             <p className='clever-avatar__avatar-placeholder'>{name.toUpperCase()[0]}</p>
         </div>
         
